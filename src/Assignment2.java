@@ -17,10 +17,8 @@ import java.util.Scanner;
 
 public class Assignment2 {
 
-
     public static void main(String[] args)
     {
-
         System.out.println("This program will calculate the BMI base on the weight in kilograms and the height in meters.");
 
         //Call method GetWeighValue to get the Weight
@@ -31,7 +29,6 @@ public class Assignment2 {
 
         //Pass the values to the CalculateBMI method and return the result
         CalculateBMI(Weight, Height);
-
     }
 
     public static Double GetWeightValue()
@@ -41,8 +38,20 @@ public class Assignment2 {
 
         //Prompt user to enter weight in pounds
         System.out.println("Please enter the weight in pounds: ");
-        Double Weight = keyboard.nextDouble();
+        Double Weight;
 
+        //Check the input value
+        //If user enter a letter instead of a number, ask user to enter number only
+        try {
+            Weight = keyboard.nextDouble();
+        }
+        catch (Exception e){
+            System.out.println("Value is not a number. Please enter number only!");
+            Weight = GetWeightValue();
+        }
+
+        //Check if number is possitive or not
+        //Only accept number that larger than 0
         if(Weight <= 0)
         {
             //Input is invalid, ask user to enter a positive value
@@ -50,8 +59,6 @@ public class Assignment2 {
             System.out.println("The weight value is invalid, please enter a different value!");
             Weight = GetWeightValue();
         }
-
-        keyboard.close();
 
         return  Weight;
     }
@@ -63,8 +70,20 @@ public class Assignment2 {
 
         //Prompt user to enter the height in inches
         System.out.println("Please enter the height in inches:");
-        Double Height = keyboard.nextDouble();
+        Double Height;
 
+        //Check the input value
+        //If user enter a letter instead of a number, ask user to enter number only
+        try {
+            Height = keyboard.nextDouble();
+        }
+        catch (Exception e){
+            System.out.println("Value is not a number. Please enter number only!");
+            Height = GetHeightValue();
+        }
+
+        //Check if number is possitive or not
+        //Only accept number that larger than 0
         if(Height <= 0)
         {
             //Input is invalid, ask user to enter a positive value
@@ -73,11 +92,8 @@ public class Assignment2 {
             Height = GetHeightValue();
         }
 
-        keyboard.close();
-
         return  Height;
     }
-
 
     public static void CalculateBMI(Double Weight, Double Height)
     {
@@ -94,6 +110,8 @@ public class Assignment2 {
         DecimalFormat df = new DecimalFormat("0.0");
 
         //Print out the result
+        System.out.println("The Weight in kilograms is: "+df.format(Weight) +"kg");
+        System.out.println("The Height in meters is: "+df.format(Height) +"m");
         System.out.println("The BMI is: "+df.format(BMI));
     }
 }
